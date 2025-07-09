@@ -1,0 +1,78 @@
+【クラス設計ドキュメント】
+
+---
+
+■ クラス名：Slime
+・主担当者名：三好杏那
+
+【属性（変数）一覧】
+
+* int x：スライムのX座標
+* int y：スライムのY座標
+* int speed：移動速度
+* String direction：現在の移動方向（"up", "down", "left", "right"）
+* boolean isAlive：生存状態
+
+【メソッド一覧】
+
+* void move()：現在の方向にスライムを移動させる
+* void changeDirection()：ランダムに方向を変更する
+* void draw(Graphics g)：スライムを画面に描画する
+* boolean checkCollisionWithPackman(Packman p)：パックマンと接触したかを確認する
+
+【メモ】
+
+* スライムはゴーストのように自律的に動き、パックマンに接触するとゲームオーバー。
+* 移動は一定時間ごとに行う。
+
+---
+
+■ クラス名：Item
+・主担当者名：三好杏那
+
+【属性（変数）一覧】
+
+* int x：アイテムのX座標
+* int y：アイテムのY座標
+* boolean isEaten：すでに取得されたか
+* String type：アイテムの種類（"dot", "power"など）
+
+【メソッド一覧】
+
+* void draw(Graphics g)：アイテムを画面に描画する
+* void eat()：アイテムを取得状態にする
+* boolean isCollisionWithPackman(Packman p)：パックマンと接触したか確認する
+
+【メモ】
+
+* ドットはすべて取得されるとステージクリア。
+* パワーアイテムを取得すると一定時間スライムを倒せる。
+
+---
+
+■ クラス名：Packman
+・主担当者名：三好杏那
+
+【属性（変数）一覧】
+
+* int x：パックマンのX座標
+* int y：パックマンのY座標
+* int speed：移動速度
+* String direction：入力に応じた方向
+* int score：現在のスコア
+* boolean isPowered：パワー状態かどうか
+* int powerTimer：パワー状態の残り時間
+
+【メソッド一覧】
+
+* void move()：入力に応じて移動する
+* void draw(Graphics g)：パックマンを画面に描画する
+* void updatePowerState()：パワー状態の時間管理
+* void eatItem(Item item)：アイテムを食べる処理
+* boolean checkCollisionWithSlime(Slime s)：スライムとの接触判定
+
+【メモ】
+
+* キーボード入力で方向を制御する。
+* スライムにぶつかるとゲームオーバー（パワー状態ならスライムを倒す）。
+* スコア加算はドット取得やスライムを倒したとき。
