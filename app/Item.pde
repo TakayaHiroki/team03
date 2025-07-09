@@ -10,7 +10,6 @@ class Item {
     this.isEaten = false;
   }
 
-  // Processing風：paint() を自作して draw() で呼び出せるように
   void paint() {
     if (!isEaten) {
       pushMatrix();
@@ -33,5 +32,13 @@ class Item {
     float distance = dist(x, y, p.x, p.y);
     float threshold = 12;
     return !isEaten && distance < threshold;
+  }
+
+  String getType() {
+    return type;
+  }
+
+  boolean isEaten() {
+    return isEaten;
   }
 }

@@ -1,26 +1,23 @@
-import java.awt.Graphics;
+abstract class Character {
+  int x, y;
+  int speed;
+  String direction;
 
-public abstract class Character {
-    protected int x;
-    protected int y;
-    protected int speed;
-    protected String direction; // "up", "down", "left", "right"
+  Character(int x, int y, int speed, String direction) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.direction = direction;
+  }
 
-    public Character(int x, int y, int speed, String direction) {
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.direction = direction;
+  void move() {
+    switch (direction) {
+      case "up":    y -= speed; break;
+      case "down":  y += speed; break;
+      case "left":  x -= speed; break;
+      case "right": x += speed; break;
     }
+  }
 
-    public void move() {
-        switch (direction) {
-            case "up": y -= speed; break;
-            case "down": y += speed; break;
-            case "left": x -= speed; break;
-            case "right": x += speed; break;
-        }
-    }
-
-    public abstract void draw(Graphics g); // 描画は各子クラスで定義
+  abstract void paint();
 }

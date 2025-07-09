@@ -1,46 +1,45 @@
-import java.awt.Color;
-import java.awt.Graphics;
+class Player extends Character {
+  int score;
+  boolean isPowered;
+  int powerTimer;
 
-public class Player extends Character {
-    private int score;
-    private boolean isPowered;
-    private int powerTimer;
+  Player(int x, int y, int speed) {
+    super(x, y, speed, "right");
+    this.score = 0;
+    this.isPowered = false;
+    this.powerTimer = 0;
+  }
 
-    public Player(int x, int y, int speed) {
-        super(x, y, speed, "right");
-        this.score = 0;
-        this.isPowered = false;
-        this.powerTimer = 0;
+  void eatItem(Item item) {
+    item.eat();
+    if (item.getType().equals("dot")) {
+      score += 10;
+    } else if (item.getType().equals("power")) {
+      isPowered = true;
+      powerTimer = 300;
     }
+  }
 
-    public void eatItem(Item item) {
-        item.eat();
-        if (item.getType().equals("dot")) {
-            score += 10;
-        } else if (item.getType().equals("power")) {
-            isPowered = true;
-            powerTimer = 300; // 例：5秒分（60FPS前提）
-        }
+  void updatePowerState() {
+    if (isPowered) {
+      powerTimer--;
+      if (powerTimer <= 0) {
+        isPowered = false;
+      }
     }
+  }
 
-    public void updatePowerState() {
-        if (isPowered) {
-            powerTimer--;
-            if (powerTimer <= 0) {
-                isPowered = false;
-            }
-        }
-    }
+  void paint() {
+    fill(255, 255, 0);
+    noStroke();
+    arc(x, y, 20, 20, radians(45), radians(315));
+  }
 
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillArc(x, y, 20, 20, 45, 270); // パックマンの口
-    }
+  boolean checkCollisionWithSlime(Slime s) {
+    return (this.x == s.x && this.y == s.y);
+  }
 
-    public boolean checkCollisionWithSlime(Slime s) {
-        return (this.x == s.x && this.y == s.y);
-    }
-
-    // getter/setterは必要に応じて追加
+  boolean isPowered() {
+    return isPowered;
+  }
 }

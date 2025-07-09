@@ -1,36 +1,33 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.Random;
+class Slime extends Character {
+  boolean isAlive;
+  
+  Slime(int x, int y, int speed) {
+    super(x, y, speed, "left");
+    this.isAlive = true;
+  }
 
-public class Slime extends Character {
-    private boolean isAlive;
-    private Random rand = new Random();
+  void changeDirection() {
+    String[] dirs = {"up", "down", "left", "right"};
+    direction = dirs[int(random(4))];
+  }
 
-    public Slime(int x, int y, int speed) {
-        super(x, y, speed, "left");
-        this.isAlive = true;
+  boolean checkCollisionWithPlayer(Player p) {
+    return (this.x == p.x && this.y == p.y);
+  }
+
+  void paint() {
+    if (isAlive) {
+      fill(0, 255, 0);
+      noStroke();
+      ellipse(x, y, 20, 20);
     }
+  }
 
-    public void changeDirection() {
-        String[] dirs = {"up", "down", "left", "right"};
-        this.direction = dirs[rand.nextInt(4)];
-    }
+  boolean isAlive() {
+    return isAlive;
+  }
 
-    public boolean checkCollisionWithPlayer(Player p) {
-        return (this.x == p.x && this.y == p.y);
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillOval(x, y, 20, 20);
-    }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.isAlive = alive;
-    }
+  void setAlive(boolean alive) {
+    this.isAlive = alive;
+  }
 }
