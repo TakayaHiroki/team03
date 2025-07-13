@@ -6,8 +6,7 @@ class Player extends Character {
 
   @Override
   void paint() {
-    fill(255, 255, 0); // 黄色
-    noStroke();
-    ellipse(x, y, 20, 20); // 簡単な円で描画
+    imageMode(CENTER);
+    image(playerImage,x,y,20,20);
   }
 }

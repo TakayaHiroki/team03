@@ -16,11 +16,11 @@ class Item {
       noStroke();
       
       if (type.equals("fruit")) {
-        fill(255, 100, 100); // 赤色のフルーツ
-        ellipse(x, y, 16, 16);
+        imageMode(CENTER);
+        image(fruitImage,x,y,16,16);
       } else if (type.equals("treasure")) {
-        fill(255, 255, 0); // 黄色の宝物
-        ellipse(x, y, 20, 20);
+        imageMode(CENTER);
+        image(treasureImage,x,y,20,20);
       } else if (type.equals("dot")) {
         fill(255, 255, 255); // 白色のドット
         ellipse(x, y, 4, 4);

@@ -111,16 +111,8 @@ class Slime extends Character {
   @Override
   void paint() {
     if (isAlive) {
-      fill(0, 255, 0); // 緑色
-      noStroke();
-      ellipse(x, y, 20, 20);
-      
-      // デバッグ用：プレイヤーとの距離が近い場合は色を変える
-      float distToPlayer = dist(x, y, player.x, player.y);
-      if (distToPlayer < 100) {
-        fill(255, 0, 0); // 追跡中は赤色
-        ellipse(x, y, 18, 18);
-      }
+      imageMode(CENTER);
+      image(slimeImage,x,y,20,20);
     }
   }
 }
