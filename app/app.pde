@@ -13,6 +13,12 @@ int startTime;
 
 // 画像を保持する変数
 PImage playerImage, slimeImage, fruitImage, treasureImage;
+void loadImages() {
+  playerImage   = loadImage("player.png");
+  slimeImage    = loadImage("slime.png");
+  fruitImage    = loadImage("fruit.png");
+  treasureImage = loadImage("treasure.png");
+}
 
 // キャラクターオブジェクト
 Player player;
@@ -72,13 +78,6 @@ void draw() {
 //--------------------------------
 // HELPER FUNCTIONS (各種補助機能)
 //--------------------------------
-
-void loadImages() {
-  playerImage   = loadImage("player.png");
-  slimeImage    = loadImage("slime.png");
-  fruitImage    = loadImage("fruit.png");
-  treasureImage = loadImage("treasure.png");
-}
 
 void createCharactersFromMap() {
   slimes = new ArrayList<Slime>();
