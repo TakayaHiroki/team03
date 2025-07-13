@@ -73,7 +73,6 @@ void draw() {
 // HELPER FUNCTIONS (各種補助機能)
 //--------------------------------
 
-// ★★★ この関数が抜けていました ★★★
 void loadImages() {
   playerImage   = loadImage("player.png");
   slimeImage    = loadImage("slime.png");
