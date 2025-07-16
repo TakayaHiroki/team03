@@ -12,18 +12,20 @@ int totalTime = 300; // 制限時間を5分（300秒）に延長
 int startTime;
 
 // 画像を保持する変数
-PImage playerImage, slimeImage, fruitImage, treasureImage;
+PImage playerImage, slimeImage, fruitImage, treasureImage, heartImage;
+
 void loadImages() {
   playerImage   = loadImage("player.png");
   slimeImage    = loadImage("slime.png");
   fruitImage    = loadImage("fruit.png");
   treasureImage = loadImage("treasure.png");
+  heartImage    = loadImage("heart.png");
 }
 
 // キャラクターオブジェクト
 Player player;
 ArrayList<Slime> slimes;
-ArrayList<Item> items; // アイテムリストを追加
+ArrayList<Item> items;
 
 //--------------
 // SETUP & DRAW
@@ -33,12 +35,12 @@ void setup() {
   size(640, 480);
   frameRate(60); 
   
-  loadImages(); // 画像読み込み
+  loadImages();
   
   gameMap = new GameMap("map.txt"); 
   
-  createCharactersFromMap(); // マップからキャラクターを生成
-  createItemsFromMap(); // アイテムを生成
+  createCharactersFromMap();
+  createItemsFromMap();
 
   textAlign(CENTER, CENTER);
   textSize(20);
@@ -50,13 +52,11 @@ void draw() {
   if (!gameStarted) {
     showStartOrEndScreen();
   } else {
-    // === ゲーム実行中の処理 ===
     gameMap.draw();
     
     player.move();
     player.paint();
     
-    // スライムの移動と描画
     for (Slime s : slimes) {
       if (s.isAlive) {
         s.move();
@@ -64,20 +64,19 @@ void draw() {
       }
     }
     
-    // アイテムの描画
     for (Item item : items) {
       item.paint();
     }
     
     drawUI();
     updateGameLogic();
-    checkCollisions(); // 衝突判定を追加
+    checkCollisions();
   }
 }
 
-//--------------------------------
-// HELPER FUNCTIONS (各種補助機能)
-//--------------------------------
+//------------------------------
+// HELPER FUNCTIONS
+//------------------------------
 
 void createCharactersFromMap() {
   slimes = new ArrayList<Slime>();
@@ -98,7 +97,6 @@ void createCharactersFromMap() {
   }
 }
 
-// アイテムを生成する関数を追加
 void createItemsFromMap() {
   items = new ArrayList<Item>();
   for (int row = 0; row < gameMap.mapData.length; row++) {
@@ -114,22 +112,17 @@ void createItemsFromMap() {
         items.add(new Item(x, y, "treasure"));
         gameMap.mapData[row][col] = '.';
       } else if (tile == '.') {
-        // 通常の道にはドット（小さなアイテム）を配置
         items.add(new Item(x, y, "dot"));
       }
     }
   }
 }
 
-// 衝突判定を処理する関数を追加
 void checkCollisions() {
-  // プレイヤーとアイテムの衝突判定
   for (int i = items.size() - 1; i >= 0; i--) {
     Item item = items.get(i);
     if (item.isCollisionWithPlayer(player)) {
       item.eat();
-      
-      // アイテムの種類に応じてスコアを加算
       if (item.getType().equals("fruit")) {
         score += 100;
       } else if (item.getType().equals("treasure")) {
@@ -137,42 +130,33 @@ void checkCollisions() {
       } else if (item.getType().equals("dot")) {
         score += 10;
       }
-      
-      // 食べられたアイテムを削除
       items.remove(i);
     }
   }
-  
-  // プレイヤーとスライムの衝突判定
+
   for (Slime slime : slimes) {
     if (slime.isAlive && isCollisionBetweenCharacters(player, slime)) {
-      // プレイヤーがスライムに触れたらライフを減らす
       life--;
-      // プレイヤーを初期位置に戻す（オプション）
       resetPlayerPosition();
-      break; // 一度に複数のスライムとの衝突を避ける
+      break;
     }
   }
-  
-  // 全てのアイテムが食べられたらゲームクリア
+
   if (items.size() == 0) {
     gameOver = true;
     gameStarted = false;
   }
 }
 
-// キャラクター同士の衝突判定
 boolean isCollisionBetweenCharacters(Character c1, Character c2) {
   float distance = dist(c1.x, c1.y, c2.x, c2.y);
-  return distance < 20; // 両方とも半径10の円として判定
+  return distance < 20;
 }
 
-// プレイヤーを初期位置に戻す
 void resetPlayerPosition() {
   for (int row = 0; row < gameMap.mapData.length; row++) {
     for (int col = 0; col < gameMap.mapData[row].length; col++) {
       if (gameMap.mapData[row][col] == '.' && row > 0 && col > 0) {
-        // 最初に見つかった道の位置に戻す
         player.x = col * gameMap.tileSize + gameMap.tileSize / 2 + gameMap.offsetX;
         player.y = row * gameMap.tileSize + gameMap.tileSize / 2 + gameMap.offsetY;
         return;
@@ -193,21 +177,25 @@ void drawUI() {
   textAlign(CENTER, CENTER);
   text("Time: " + remainingTime, width / 2, 20);
 
-  fill(255, 0, 0);
-  textAlign(RIGHT, CENTER);
-  text(getHearts(life) + " Life", width - 10, 20);
-  
-  // 残りアイテム数を表示
+  drawHearts();
+
   fill(0, 255, 255);
   textAlign(LEFT, CENTER);
   text("Items: " + items.size(), 10, 50);
 }
 
+void drawHearts() {
+  int heartSize = 24;
+  int xOffset = width - 10 - heartSize;
+  int yOffset = 20;
+  for (int i = 0; i < life; i++) {
+    image(heartImage, xOffset - i * (heartSize + 5), yOffset, heartSize, heartSize);
+  }
+}
+
 void updateGameLogic() {
   int elapsedTime = (millis() - startTime) / 1000;
   int remainingTime = max(0, totalTime - elapsedTime);
-  
-  // 3秒ごとにライフを減らす処理を削除（スライムとの衝突でのみライフが減る）
   
   if (life <= 0 || remainingTime <= 0) {
     gameOver = true;
@@ -222,7 +210,6 @@ void restartGame() {
   gameStarted = true;
   gameOver = false;
   
-  // マップを再読み込み
   gameMap = new GameMap("map.txt");
   createCharactersFromMap();
   createItemsFromMap();
@@ -251,16 +238,8 @@ void showStartOrEndScreen() {
   }
 }
 
-String getHearts(int n) {
-  String hearts = "";
-  for (int i = 0; i < n; i++) {
-    hearts += "💗";
-  }
-  return hearts;
-}
-
 //----------------------
-// USER INPUT (キー入力)
+// USER INPUT
 //----------------------
 
 void keyPressed() {
@@ -279,14 +258,12 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  // キーを離したときの挙動
   if (player != null) {
-      // 押されているキーと同じ方向のキーが離されたら停止
-      if ((key == 'w' && player.direction.equals("up")) ||
-          (key == 's' && player.direction.equals("down")) ||
-          (key == 'a' && player.direction.equals("left")) ||
-          (key == 'd' && player.direction.equals("right"))) {
-          player.setDirection("stop");
-      }
+    if ((key == 'w' && player.direction.equals("up")) ||
+        (key == 's' && player.direction.equals("down")) ||
+        (key == 'a' && player.direction.equals("left")) ||
+        (key == 'd' && player.direction.equals("right"))) {
+      player.setDirection("stop");
+    }
   }
 }
