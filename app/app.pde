@@ -232,7 +232,7 @@ void showStartOrEndScreen() {
     textSize(20);
     text("Press SPACE to Restart", width / 2, height / 2 + 30);
   } else {
-    text("Pac-Man Game", width / 2, height / 2 - 30);
+    text("Mog-Man", width / 2, height / 2 - 30);
     textSize(20);
     text("Press SPACE to Start", width / 2, height / 2 + 10);
   }
