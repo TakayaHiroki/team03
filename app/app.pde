@@ -254,7 +254,7 @@ void showStartOrEndScreen() {
 String getHearts(int n) {
   String hearts = "";
   for (int i = 0; i < n; i++) {
-    hearts += "❤️";
+    hearts += "💗";
   }
   return hearts;
 }
