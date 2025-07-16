@@ -1,0 +1,2 @@
+ This is temp file.
+If you have other file, you can delete this file "tmp.txt".
