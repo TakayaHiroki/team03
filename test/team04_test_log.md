@@ -6,6 +6,7 @@
 - テスト内容：1マス目赤に止まる
 - 期待される結果：2マス戻る処理を引いてもスタートで止まる
 - 実際の結果：ゲームがクラッシュする
+- 合否：NG
 - 備考：エラーコード：ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 60
 
 ## 01-2
@@ -23,4 +24,5 @@
 - テスト内容：コードの処理と実際の動作の確認
 - 期待される結果：（省略）
 - 実際の結果：コード内の矛盾
+- 合否：NG
 - 備考：spinSpeed += deceleration;
