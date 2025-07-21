@@ -103,7 +103,7 @@
 - 合否：OK
 - 備考：<img width="636" height="512" alt="image" src="https://github.com/user-attachments/assets/ca36a774-31e0-4f6f-9fc7-bd7984904b50" />
 
-## 01-11
+## 01-12
 - 実施者：髙屋宙希
 - 実施日時：2025/7/22 00:40
 - テスト内容：矢印キーの押下
@@ -112,7 +112,7 @@
 - 合否：OK
 - 備考：<img width="634" height="509" alt="image" src="https://github.com/user-attachments/assets/95959625-2b91-4949-96a9-1a04cb9303ee" />
 
-## 01-11
+## 01-13
 - 実施者：髙屋宙希
 - 実施日時：2025/7/22 00:41
 - テスト内容：ゲーム操作中のスペースキー押下
