@@ -87,11 +87,38 @@
 
 ## 01-10
 - 実施者：髙屋宙希
-- 実施日時：2025/7/22 00:
+- 実施日時：2025/7/22 00:30
 - テスト内容：すべてのアイテムの取得
 - 期待される結果：クリア画面の表示、スコア表示
 - 実際の結果：
 - 合否：OK
 - 備考：<img width="636" height="509" alt="image" src="https://github.com/user-attachments/assets/13151899-8a62-4d85-aaaa-75c10497bf84" />
+
+## 01-11
+- 実施者：髙屋宙希
+- 実施日時：2025/7/22 00:37
+- テスト内容：マップの角に移動し続ける
+- 期待される結果：すり抜けることなく止まる
+- 実際の結果：すり抜けはできなかった
+- 合否：OK
+- 備考：<img width="636" height="512" alt="image" src="https://github.com/user-attachments/assets/ca36a774-31e0-4f6f-9fc7-bd7984904b50" />
+
+## 01-11
+- 実施者：髙屋宙希
+- 実施日時：2025/7/22 00:40
+- テスト内容：矢印キーの押下
+- 期待される結果：変化なし
+- 実際の結果：変化なし
+- 合否：OK
+- 備考：<img width="634" height="509" alt="image" src="https://github.com/user-attachments/assets/95959625-2b91-4949-96a9-1a04cb9303ee" />
+
+## 01-11
+- 実施者：髙屋宙希
+- 実施日時：2025/7/22 00:41
+- テスト内容：ゲーム操作中のスペースキー押下
+- 期待される結果：変化なし
+- 実際の結果：変化なし
+- 合否：OK
+- 備考：<img width="636" height="504" alt="image" src="https://github.com/user-attachments/assets/ecc6b66e-c74b-4d06-a153-85e2a039f6a4" />
 
 
