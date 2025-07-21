@@ -1,4 +1,4 @@
-<img width="640" height="506" alt="image" src="https://github.com/user-attachments/assets/92970576-a096-4717-9982-6c93f4e4f046" /># テスト記録01
+# テスト記録01
 
 ## 01-1
 - 実施者：髙屋宙希
