@@ -1,5 +1,7 @@
 # 🎮 softeng2 - 迷路探索アクションゲーム（Processing版）
 
+[操作方法はこちら](https://ehimeuniv-my.sharepoint.com/:b:/g/personal/k520264u_mails_cc_ehime-u_ac_jp/Eak8aT6p2d5Mjvbunnjm0mIBphSt3Eyom38tSMNqxqGdCQ?e=XHLv1R)
+
 ソフトウェア工学演習用プロジェクト  
 チームで協力して、**Processing** を用いた2D迷路探索型アクションゲームを開発します。
 
